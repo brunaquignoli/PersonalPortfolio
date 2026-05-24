@@ -338,7 +338,14 @@
           padding:10px 14px;
         }
 
-        
+        img{
+          height:500px;
+          object-fit:cover;
+          border-radius:18px;
+          border:2px solid #ff9fca;
+          box-shadow:0 0 20px rgba(255, 179, 218, 0.4);
+          margin:15px;
+        }
 
     }
 
