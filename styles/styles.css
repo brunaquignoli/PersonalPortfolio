@@ -409,6 +409,48 @@ body {
   }
 }
 
+/* ABOUT ME PAGE */
+.div-lista{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 15px;
+
+  span{
+    justify-content: justify;
+    color: #f2dce7;
+    padding: 10px 14px;
+  }
+
+  h3{
+    background: linear-gradient(to left, #d5cedd27, #ad3a791a);
+    padding: 10px 14px;
+    border-radius: 18px;
+    color: #ffb7d5;
+    border-radius: 18px;
+    border: 2px solid #ff9fca;
+    box-shadow: 0 0 20px rgba(255, 179, 218, 0.4);
+    margin: 15px;
+  }
+
+  li{
+    margin: 15px;
+  }
+
+  img{
+    height: 400px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 2px solid #ff9fca;
+    box-shadow: 0 0 20px rgba(255, 179, 218, 0.4);
+    margin: 15px;
+  }
+}
 
 
 /* RESPONSIVO */
