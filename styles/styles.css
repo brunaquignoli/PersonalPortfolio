@@ -123,11 +123,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  align-items: center;
+  gap: 20px;
 }
 
 .hero-text {
-  max-width: 600px;
+  width: fit-content;
+  max-width: 800px;
 }
 
 .hero-text span {
@@ -259,9 +261,32 @@ body {
   flex-wrap: wrap;
 }
 
+.spotligthcards {
+  width: 100%;
+  max-height: 100px;
+  margin-top: 30px;
+  gap: calc();
+}
+
+.spotligthcards h3 {
+  color: #ffb7d5;
+  margin-bottom: 18px;
+}
+
+#spotligthcards {
+  display: flex;
+  margin: 10px;
+}
+
+.loading-projects {
+  color: #f2dce7;
+  line-height: 1.6;
+}
+
 .projectcard {
   width: 280px;
-  padding: 24px;
+  height: 280px;
+  padding: 16px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
@@ -269,6 +294,7 @@ body {
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.25);
   transition: 0.3s;
+  gap: 10px;
 }
 
 .projectcard:hover {
