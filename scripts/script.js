@@ -1,7 +1,7 @@
 const featuredProjectIds = [
     949162550,
     1041645177,
-    948182726
+    984383729
 ];
 
 const allProjectIds = [
@@ -67,7 +67,7 @@ async function loadProjects() {
     }
 
     projectSections.forEach(section => {
-        section.container.innerHTML = "<p class='loading-projects'>Peraii ainda ta carregando projetos...</p>";
+        section.container.innerHTML = "<p class='loading-projects'> Peraii ainda ta carregando projetos... </p>";
     });
 
     projectSections.forEach(async section => {
