@@ -6,8 +6,8 @@
 
 body {
   background:
-    radial-gradient(circle at top, rgba(255, 120, 180, 0.18), transparent 35%),
-    linear-gradient(to bottom, #120d18, #ad3a79d8);
+    radial-gradient(circle at top, rgba(238, 168, 192, 0.295), transparent 35%),
+    linear-gradient(to bottom, #120d18, #e713489a);
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   color: white;
