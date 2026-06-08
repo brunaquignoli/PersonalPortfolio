@@ -908,7 +908,7 @@ img {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-top: 16px;
 }
@@ -1022,102 +1022,6 @@ img {
   left: 0;
   color: #ffb7d5;
   font-weight: bold;
-}
-
-/* CERTIFICADOS PAGE */
-
-.certificates-section {
-  margin-top: 24px;
-}
-
-.cert-intro {
-  color: #e8d6e2;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-top: 12px;
-  margin-bottom: 24px;
-}
-
-.certificate-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 18px;
-  margin-top: 20px;
-}
-
-.cert-placeholder {
-  min-height: 280px;
-  border: 2px dashed rgba(255, 183, 213, 0.4);
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 183, 213, 0.05);
-  cursor: pointer;
-  transition: all 0.3s;
-  gap: 12px;
-}
-
-.cert-placeholder:hover {
-  border-color: rgba(255, 183, 213, 0.7);
-  background: rgba(255, 183, 213, 0.1);
-  transform: scale(1.02);
-}
-
-.cert-placeholder span {
-  font-size: 1rem;
-  color: #ffb7d5;
-  font-weight: 300;
-  text-align: center;
-}
-
-.cert-placeholder p {
-  color: #d5cedd;
-  font-size: 0.85rem;
-  text-align: center;
-  max-width: 200px;
-}
-
-.cert-image-card {
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 183, 213, 0.2);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-  min-height: 280px;
-}
-
-.cert-image-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 48px rgba(255, 140, 200, 0.25);
-  border-color: rgba(255, 183, 213, 0.4);
-}
-
-.cert-image-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.cert-image-card:hover img {
-  transform: scale(1.05);
-}
-
-.cert-image-card .cert-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(18, 13, 24, 0.95), transparent);
-  padding: 16px;
-  color: #ffd2e7;
-  font-size: 0.85rem;
-  font-weight: 600;
 }
 
 /* RESPONSIVE SKILLS */
