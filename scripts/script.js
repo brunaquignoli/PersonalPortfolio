@@ -11,6 +11,65 @@ const allProjectIds = [
     985950450
 ];
 
+const fallbackProjects = {
+    949162550: {
+        name: "SiteBiblioteca",
+        html_url: "https://github.com/brunaquignoli/SiteBiblioteca",
+        description: "Site de um sistema de gerenciamento de livros, utilizando Java, HTML, CSS e JavaScript!"
+    },
+    1041645177: {
+        name: "brunaquignoli",
+        html_url: "https://github.com/brunaquignoli/brunaquignoli",
+        description: "Conheça mais sobre mim!"
+    },
+    984383729: {
+        name: "SearchSeries",
+        html_url: "https://github.com/brunaquignoli/SearchSeries",
+        description: "Screen Match sem web feito com Java + Spring Boot."
+    },
+    1193233078: {
+        name: "ConsultaProdutos",
+        html_url: "https://github.com/brunaquignoli/ConsultaProdutos",
+        description: "Projeto web de cadastro e consulta de produtos em Java com JSP, Servlet e JDBC!"
+    },
+    987980526: {
+        name: "SiteBiblioteca",
+        html_url: "https://github.com/brunaquignoli/SiteBiblioteca",
+        description: "Site de um sistema de gerenciamento de livros, utilizando Java, HTML, CSS e JavaScript!"
+    },
+    985950450: {
+        name: "brunaquignoli",
+        html_url: "https://github.com/brunaquignoli/brunaquignoli",
+        description: "Conheça mais sobre mim!"
+    }
+};
+
+const projectCacheKey = "devproject-github-project-cache";
+
+function readProjectCache() {
+    try {
+        return JSON.parse(localStorage.getItem(projectCacheKey) || "{}");
+    } catch {
+        return {};
+    }
+}
+
+function writeProjectCache(cache) {
+    try {
+        localStorage.setItem(projectCacheKey, JSON.stringify(cache));
+    } catch {
+        // Ignora erros de armazenamento e continua com a rede.
+    }
+}
+
+function getCachedProject(cache, id) {
+    return cache[String(id)] || null;
+}
+
+function getFallbackProject(id) {
+    return fallbackProjects[id] || null;
+}
+
 function formatDate(date) {
     return new Intl.DateTimeFormat("pt-BR", {
         day: "2-digit",
@@ -20,7 +79,11 @@ function formatDate(date) {
 }
 
 function renderProjects(container, repos) {
-    container.innerHTML = repos.map(repo => `
+    const uniqueRepos = repos.filter((repo, index, allRepos) =>
+        index === allRepos.findIndex(otherRepo => otherRepo.html_url === repo.html_url)
+    );
+
+    container.innerHTML = uniqueRepos.map(repo => `
         <article class="projectcard">
             <div class="projectcard-header">
             </div>
@@ -37,17 +100,41 @@ function renderProjects(container, repos) {
 }
 
 async function fetchProjects(projectIds) {
-    const requests = projectIds.map(id =>
-        fetch(`https://api.github.com/repositories/${id}`).then(response => {
+    const cache = readProjectCache();
+    const requests = projectIds.map(async id => {
+        const cachedProject = getCachedProject(cache, id);
+        const fallbackProject = getFallbackProject(id);
+
+        try {
+            const response = await fetch(`https://api.github.com/repositories/${id}`);
+
             if (!response.ok) {
                 throw new Error(`Projeto ${id} nao encontrado`);
             }
 
-            return response.json();
-        })
-    );
+            const repo = await response.json();
+            cache[String(id)] = repo;
+            return repo;
+        } catch (error) {
+            if (cachedProject) {
+                return cachedProject;
+            }
 
-    return Promise.all(requests);
+            if (fallbackProject) {
+                return fallbackProject;
+            }
+
+            throw error;
+        }
+    });
+
+    const settledProjects = await Promise.allSettled(requests);
+    const repos = settledProjects
+        .filter(result => result.status === "fulfilled" && result.value)
+        .map(result => result.value);
+
+    writeProjectCache(cache);
+    return repos;
 }
 
 async function loadProjects() {
@@ -74,7 +161,16 @@ async function loadProjects() {
         try {
             const repos = await fetchProjects(section.projectIds);
 
-            renderProjects(section.container, repos);
+            if (repos.length) {
+                renderProjects(section.container, repos);
+                return;
+            }
+
+            section.container.innerHTML = `
+                <p class="loading-projects">
+                    Nao consegui carregar os projetos agora.
+                </p>
+            `;
         } catch (error) {
             section.container.innerHTML = `
                 <p class="loading-projects">
