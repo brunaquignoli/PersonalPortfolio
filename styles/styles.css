@@ -327,6 +327,9 @@ img {
   border: 1px solid rgba(255, 210, 231, 0.18);
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 260px;
+  contain: layout paint;
 }
 
 .projectcard::before {
@@ -728,7 +731,26 @@ img {
   .projectcard,
   .projects-container,
   .skill-card {
-    backdrop-filter: blur(4px);
+    backdrop-filter: none;
+  }
+
+  .projects-container,
+  .projectcard,
+  .skill-card {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+  }
+
+  .projectcard,
+  .skill-card {
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .projects-container,
+  .projectcard,
+  .skill-card,
+  .sidebar,
+  .floating-card {
+    background-clip: padding-box;
   }
 
   .petal:nth-child(n + 7) {
@@ -965,6 +987,9 @@ img {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 320px;
+  contain: layout paint;
 }
 
 .skill-card::before {
